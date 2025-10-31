@@ -1,0 +1,25 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential git curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install only frontend deps to avoid heavy ML packages (saves time in build)
+COPY requirements-streamlit.txt ./requirements-streamlit.txt
+RUN pip install --no-cache-dir -r requirements-streamlit.txt
+
+# Copy only the Streamlit app and uploads dir
+COPY app.py /app/
+RUN mkdir -p /app/uploaded_papers
+
+EXPOSE 8501
+
+ENV UPLOAD_DIR=/app/uploaded_papers \
+    API_BASE=http://api:8000/api
+
+CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port", "8501", "--server.headless", "true", "--server.address", "0.0.0.0"]
