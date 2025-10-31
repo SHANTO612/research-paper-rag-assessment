@@ -26,7 +26,8 @@ class EmbeddingService:
         """Initialize the embedding model asynchronously."""
         if self.model is None:
             # Load model in a separate thread to avoid blocking
-            self.model = await asyncio.to_thread(SentenceTransformer, self.model_name)
+            # Force CPU device to avoid meta tensor errors in some container builds
+            self.model = await asyncio.to_thread(SentenceTransformer, self.model_name, device="cpu")
             logger.info(f"Initialized embedding model: {self.model_name}")
     
     async def generate_embeddings(self, texts: List[str]) -> List[np.ndarray]:
@@ -49,7 +50,7 @@ class EmbeddingService:
         for i in range(0, len(texts), batch_size):
             batch = texts[i:i + batch_size]
             # Run embedding generation in a thread pool
-            batch_embeddings = await asyncio.to_thread(self.model.encode, batch)
+            batch_embeddings = await asyncio.to_thread(self.model.encode, batch, convert_to_numpy=True)
             all_embeddings.extend(batch_embeddings)
         
         return all_embeddings
@@ -68,7 +69,7 @@ class EmbeddingService:
             await self.initialize()
         
         # Run embedding generation in a thread pool
-        embedding = await asyncio.to_thread(self.model.encode, query)
+        embedding = await asyncio.to_thread(self.model.encode, query, convert_to_numpy=True)
         return embedding
 
 # Create a singleton instance

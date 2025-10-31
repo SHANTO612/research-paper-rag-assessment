@@ -38,15 +38,11 @@ DATABASE_URL=postgresql+asyncpg://<user>:<pass>@<host>/<db>?sslmode=require
 QDRANT_HOST=qdrant
 QDRANT_PORT=6333
 
-# LLM selection: gemini | ollama | deepseek
+# LLM selection: gemini 
 LLM_TYPE=gemini
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-2.5-flash
 
-OLLAMA_BASE_URL=http://ollama:11434
-OLLAMA_MODEL=llama3
-
-DEEPSEEK_API_KEY=
 
 # Embeddings (match your chosen model’s vector size)
 VECTOR_SIZE=768
