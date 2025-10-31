@@ -21,7 +21,7 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("""
 **Tech stack:**  
 [Streamlit](https://streamlit.io/) · [FastAPI](https://fastapi.tiangolo.com/) · [Qdrant](https://qdrant.tech/)  
-[Ollama](https://ollama.ai/) / [DeepSeek](https://deepseek.com/)
+ Gemini](https://gemini.google.com/)
 """)
 
 # Use literal emoji here for tab names!

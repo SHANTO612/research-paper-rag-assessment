@@ -1,0 +1,15 @@
+# Database configuration
+DATABASE_URL=postgresql+asyncpg://neondb_owner:npg_0lmR4uUhYWsX@ep-gentle-glitter-adplgsan-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
+# Qdrant configuration
+QDRANT_URL=http://localhost:6333
+QDRANT_COLLECTION=research_papers
+VECTOR_SIZE=768
+
+# LLM configuration
+LLM_TYPE=gemini  # gemini, ollama or deepseek
+GEMINI_API_KEY=AIzaSyB14k7kdPe0IZQ5sjhC5lPlgRcifIcoXhQ
+GEMINI_MODEL=gemini-2.5-flash
+
+# Embedding model
+EMBEDDING_MODEL=all-MiniLM-L6-v2
