@@ -56,7 +56,6 @@ Notes:
 
 - Create and activate venv, install deps
 ```powershell
-Set-Location -Path D:\RAG\research-paper-rag-assessment
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -80,8 +79,8 @@ docker run -d --name rag-qdrant -p 6333:6333 -p 6334:6334 qdrant/qdrant:v1.11.0
 .\venv\Scripts\Activate.ps1
 $env:API_BASE = "http://127.0.0.1:8000/api"
 python -m streamlit run app.py --server.port 8501 --server.headless true --server.address 0.0.0.0
+Copy URL: http://localhost:8501
 ```
-
 ## Key Endpoints
 
 - Health: `GET /`
